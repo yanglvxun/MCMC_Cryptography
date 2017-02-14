@@ -2,7 +2,7 @@
 
 The codes demonstrate the "Example 1" in the paper "The Markov Chain Monte Carlo Revolution" by Persi Diaconis.
 
-## R codes
+## R codes:
 Codes.R
 
 ## Input files:
