@@ -129,8 +129,8 @@ de=function(t,k){
 }
 
 lk=function(t){
-  ## To compute the likelihood 
-  ## NOTICE: The output is a vector, whose product is the likelihood we need. 
+  ## To compute the plausibility 
+  ## NOTICE: The output is a vector, whose product is the plausibility we need. 
   ##         However, we cannot compute the product here because it is too small 
   ##         and R will treat it as 0. So we output the vector and compute it 
   ##         later.
