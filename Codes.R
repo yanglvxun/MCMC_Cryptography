@@ -212,7 +212,7 @@ for(i in 1:tests){
     # Therefore, r is pl(proposed)/pl(present)
     
     # go if U < pl(proposed)/pl(present) :
-    if(runif(1)<r){key=k1}else{key=k0}
+    if(runif(1)<r){key=k1} #else{key=k0}
     
     if(n%%1000 == 0){ # Write a Log every 1000 steps
       rst=as.str(as.c(de(hne,key)))
