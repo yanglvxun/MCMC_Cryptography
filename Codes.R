@@ -145,7 +145,7 @@ lk=function(t){
 
 ##########################################
 ##
-## Compute the transition matrix and creat
+## Compute the transition matrix and create
 ## the encrypted data.
 ##
 ##########################################
@@ -165,7 +165,7 @@ for(i in 1:53){
   tr[i,]=tr[i,]/sum(tr[i,])
 } 
 
-## Creat encrypted data
+## create encrypted data
 key=sample(53)
 rtkey=rep(NA,53) # This is the correct "key" vector we stored for computing correction rates.
 for(i in 1:53){
@@ -186,21 +186,32 @@ cat(paste("The encryped data is:\n",as.str(as.c(hne)),"\n\n",sep=""),file="Histo
 
 ## "tests" and "steps" have been set at the beginning of this file
 for(i in 1:tests){  
-  key=sample(53) # The initial key is a randem arrangement.
+  key=sample(53) # The initial key is a random arrangement.
   ## Write Log
   cat(paste("[Start the No.",i," test.]\n\n",sep=""),file="History_LOG.txt",append=T)
   ## Start Loop
   for(n in 1:steps){
-    p=sample(53,2) # Choose the 2 positions to be exchanged
-    k0=key
-    k1=key
-    k1[p[1]]=k0[p[2]]
+    k0=key # Present State
+    k1=key # Proposed State (before transposition)
+    p=sample(53,2) # Choose the 2 random positions for transposition
+    k1[p[1]]=k0[p[2]]  # Transposition
     k1[p[2]]=k0[p[1]]
-    ## In the line below, do the division first, then compute product, 
-    ## so to avoid the "treated as 0" problem mentioned before.
+    
+    # compute pl(proposed)/pl(present)) :
     r=prod(lk(de(hne,k1))/lk(de(hne,k0))) 
+    # hne is the number sequence representing the encrypted text
+    # de(hne,k1) gives the number sequence representing the decrypted text using the key "k1" (Proposed key)
+    # de(hne,k0) gives the number sequence representing the decrypted text using the key "k0" (Present key)
+    # lk(de(hne,k1)) gives a sequence of values of possibility that a alphabet s_i is followed by s_(i+1)
+    #               the values of possibility are from the matrix of transitions, i.e. M(x,y) in the reference paper
+    #                by denotation in the reference paper it is the sequence of M(f(s_i), f(s_(i+1))) ,  i=1,2,...,n-1
+    # prod(lk(de(hne,k1))/lk(de(hne,k0))) gives the product of all the possibility ratios, i.e. Pl(f*)/Pl(f) in the reference paper
+    # So r is pl(proposed)/pl(present)
+    
+    # go if U < pl(proposed)/pl(present) :
     if(runif(1)<r){key=k1}else{key=k0}
-    if(n%%1000 == 0){ ## Write Log every 1000 steps
+    
+    if(n%%1000 == 0){ # Write a Log every 1000 steps
       rst=as.str(as.c(de(hne,key)))
       cat(paste("In No. ",i," test, after ",n," steps, the result is:\n",rst,"\n\n",sep=""),file="History_LOG.txt",append=T)
     }
