@@ -202,9 +202,9 @@ for(i in 1:tests){
     # hne is the number sequence representing the encrypted text
     # de(hne,k1) gives the number sequence representing the decrypted text using the key "k1" (Proposed key)
     # de(hne,k0) gives the number sequence representing the decrypted text using the key "k0" (Present key)
-    # lk(de(hne,k1)) gives a sequence of values of possibility that a alphabet s_i is followed by s_(i+1)
+    # lk(de(hne,k1)) gives a sequence of values of possibility that a alphabet is followed by another
     #               the values of possibility are from the matrix of transitions, i.e. M(x,y) in the reference paper
-    #                by denotation in the reference paper it is the sequence of M(f(s_i), f(s_(i+1))) ,  i=1,2,...,n-1
+    #                so actually it gives the sequence of M(f(s_i), f(s_(i+1))) ,  i=1,2,...,n-1
     # prod(lk(de(hne,k1))/lk(de(hne,k0))) gives the product of all the possibility ratios, i.e. Pl(f*)/Pl(f) in the reference paper
     # So r is pl(proposed)/pl(present)
     
