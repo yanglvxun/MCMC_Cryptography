@@ -191,8 +191,8 @@ for(i in 1:tests){
   cat(paste("[Start the No.",i," test.]\n\n",sep=""),file="History_LOG.txt",append=T)
   ## Start Loop
   for(n in 1:steps){
-    k0=key # Present State
-    k1=key # Proposed State (before transposition)
+    k0=key # Present State of the key
+    k1=key # Proposed State of the key (before transposition)
     p=sample(53,2) # Choose the 2 random positions for transposition
     k1[p[1]]=k0[p[2]]  # Transposition
     k1[p[2]]=k0[p[1]]
